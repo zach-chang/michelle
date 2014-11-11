@@ -17,7 +17,7 @@
       var initialize = function() {
         var mapOptions = {
           zoom: 19,
-          center: new google.maps.LatLng(40.7293, -73.9906)
+          center: new google.maps.LatLng(40.7793964, -73.9628256)
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
@@ -30,8 +30,9 @@
               title:"Hello World",
               icon: 'https://pbs.twimg.com/profile_images/457985900/CU_Logo_Twitter_normal.jpg' //url to images
           };
+           var marker = new google.maps.Marker(markerOptions);
           // To add the marker to the map, use the 'map' property
-          var marker = new google.maps.Marker(markerOptions);
+         
         //starbucks
           var starbucksPosition = new google.maps.LatLng(40.730007, -73.991638);
           var starbucksMarkerOptions = {
@@ -40,6 +41,8 @@
               title:"Hello Starbucks",
               icon: 'https://media.licdn.com/mpr/mpr/shrink_40_40/p/6/005/04b/30a/3e3f7dd.png' //url to images
           };
+           var marker1 = new google.maps.Marker(starbucksMarkerOptions);
+        
           // met museum
           var metPosition = new google.maps.LatLng(40.7793964, -73.9628256);
           var metMarkerOptions = {
@@ -47,7 +50,8 @@
               map: map,
               title:"Hello Metropolitan Museum",
               icon: 'http://www.metmuseum.org/content/img/lauder/Met-Logo_Orange.png' //url to images
-            };
+          }; 
+           var marker2 = new google.maps.Marker(metMarkerOptions);
       };
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
