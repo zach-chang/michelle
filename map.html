@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+      var map;
+      var initialize = function() {
+        var mapOptions = {
+          zoom: 19,
+          center: new google.maps.LatLng(40.7293, -73.9906)
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+        var myLatlng = new google.maps.LatLng(40.7293, -73.9906);
+        //cooper union
+          var position = new google.maps.LatLng(40.7291, -73.9906);
+          var markerOptions = {
+              position: position,
+              map: map,
+              title:"Hello World",
+              icon: 'https://pbs.twimg.com/profile_images/457985900/CU_Logo_Twitter_normal.jpg' //url to images
+          };
+          // To add the marker to the map, use the 'map' property
+          var marker = new google.maps.Marker(markerOptions);
+        //starbucks
+          var starbucksPosition = new google.maps.LatLng(40.730007, -73.991638);
+          var starbucksMarkerOptions = {
+              position: starbucksPosition,
+              map: map,
+              title:"Hello Starbucks",
+              icon: 'https://media.licdn.com/mpr/mpr/shrink_40_40/p/6/005/04b/30a/3e3f7dd.png' //url to images
+          };
+          // met museum
+          var metPosition = new google.maps.LatLng(40.7793964, -73.9628256);
+          var metMarkerOptions = {
+              position: metPosition,
+              map: map,
+              title:"Hello Metropolitan Museum",
+              icon: 'http://static.squarespace.com/static/511fcd1fe4b03a5603c2d055/51340c6be4b060819b12cbf3/51340c6de4b060819b12cc23/1362367947723/45_Symbols_Ambar3-600x600.png' //url to images
+      };
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
