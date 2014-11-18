@@ -5,9 +5,17 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
       $(document).ready(function () {
+
         $.getJSON("http://cooper-union-color-proxy.herokuapp.com/colors", function(response){
-            /*var hex = hex*/
+            var hex = response[0].hex
+
+        $("body").append(hex);
+
         });
+
+
+
+
             /*
         $(function () {
             $('#container').highcharts({
