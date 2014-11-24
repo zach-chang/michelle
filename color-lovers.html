@@ -3,76 +3,186 @@
   <head>
     <title>Colours</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script> 
     <script>
       $(document).ready(function () {
 
-        $.getJSON("http://cooper-union-color-proxy.herokuapp.com/colors", function(response){
-            var hex = response[0].hex
+        $.getJSON("http://cooper-union-color-proxy.herokuapp.com/colors/new", function(response){
 
-        $("body").append(hex);
 
+//objective: select the reds from all the different hues
+
+//loop for red
+            redcount = 0;
+            for(var i=0; i<response.length; i++) {
+              if((response[i].hsv.hue >1)&&(response[i].hsv.hue <=17)+(response[i].hsv.hue >=349)&&(response[i].hsv.hue <=359)){
+                var red = response[i].hsv.hue;
+                var redtime = response[i].dateCreated;
+                var redhex = response[i].hex;
+                redcount++;
+              };//closes if
+            };//closes for
+            console.log (redcount)
+
+//loop for orange and orange's time
+            orangecount = 0;
+            for(var i=0; i<response.length; i++) {
+              if((response[i].hsv.hue >17)&&(response[i].hsv.hue <=35)){
+                var orange = response[i].hsv.hue;
+                var orangetime = response[i].dateCreated.substring(11, 18);
+                var orangehex = response[i].hex;
+                orangecount++;
+              };//closes if
+            };//closes for
+            console.log (orangecount)
+
+//loop for yellow and yellow's time
+            yellowcount = 0;
+            for(var i=0; i<response.length; i++) {
+              if((response[i].hsv.hue >36)&&(response[i].hsv.hue <=62)){
+                var yellow = response[i].hsv.hue;
+                var yellowtime = response[i].dateCreated.substring(11, 18);
+                var yellowhex = response[i].hex;
+                yellowcount++;
+              };//closes if
+            };//closes for
+            console.log (yellowcount)
+
+//loop for green and green's time
+            greencount = 0;
+            for(var i=0; i<response.length; i++) {
+              if((response[i].hsv.hue >63)&&(response[i].hsv.hue <=171)){
+                var green = response[i].hsv.hue;
+                var greentime = response[i].dateCreated.substring(11, 18);
+                var greenhex = response[i].hex;
+                greencount++;
+              };//closes if
+            };//closes for
+            console.log (greencount)
+
+//loop for blue and blue's time
+            bluecount = 0;
+            for(var i=0; i<response.length; i++) {
+              if((response[i].hsv.hue >175)&&(response[i].hsv.hue <=249)){
+                var blue = response[i].hsv.hue;
+                var bluetime = response[i].dateCreated.substring(11, 18);
+                var bluehex = response[i].hex;
+                bluecount++;
+              };//closes if
+            };//closes for
+            console.log (bluecount)
+
+//loop for indigo and indigo's time
+            indigocount = 0;
+            for(var i=0; i<response.length; i++) {
+              if((response[i].hsv.hue >250)&&(response[i].hsv.hue <=272)){
+                var indigo = response[i].hsv.hue;
+                var indigotime = response[i].dateCreated.substring(11, 18);
+                var indigohex = response[i].hex;
+                indigocount++;
+              };//closes if
+            };//closes for
+            console.log (indigocount)
+
+//loop for violet and violet's time
+            violetcount = 0;
+            for(var i=0; i<response.length; i++) {
+              if((response[i].hsv.hue >273)&&(response[i].hsv.hue <=348)){
+                var violet = response[i].hsv.hue;
+                var violettime = response[i].dateCreated.substring(11, 18);
+                var violethex = response[i].hex;
+                violetcount++;
+              };//closes if
+            };//closes for
+            console.log (violetcount)
+
+
+$(function () {
+
+    var colors = Highcharts.getOptions().colors,
+        categories = ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Indigo', 'Violet'],
+        data = [{
+            y: redcount,
+            color: "#" + redhex,
+        }, {
+            y: orangecount,
+            color: "#" + orangehex,
+        }, {
+            y: yellowcount,
+            color: "#" + yellowhex,
+        }, {
+            y: greencount,
+            color: "#" + greenhex,
+        }, {
+            y: bluecount,
+            color: "#" + bluehex,
+        }, {
+            y: indigocount,
+            color: "#" + indigohex,
+        }, {
+            y: violetcount,
+            color: "#" + violethex,
+
+        }],
+        browserData = [],
+        versionsData = [],
+        i,
+        j,
+        dataLen = data.length,
+        drillDataLen,
+        brightness;
+
+
+    // Build the data arrays
+    for (i = 0; i < dataLen; i += 1) {
+
+        // add browser data
+        browserData.push({
+            name: categories[i],
+            y: data[i].y,
+            color: data[i].color
         });
+    }
 
-
-
-
-            /*
-        $(function () {
-            $('#container').highcharts({
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: 1,//null,
-                    plotShadow: false
+    // Create the chart
+    $('#container').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'What the rainbow looks like this second' + "<br>" +' (Colours from Colourlovers)'
+        },
+        plotOptions: {
+            pie: {
+                shadow: false,
+                center: ['50%', '50%']
+            }
+        },
+        series: [{
+            name: 'Uploads',
+            data: browserData,
+            size: '110%',
+            dataLabels: {
+                formatter: function () {
+                    return this.y > 0 ? this.point.name : null;
                 },
-                title: {
-                    text: 'Browser market shares at a specific website, 2014'
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            }
-                        }
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    name: 'Browser share',
-                    data: [
-                        ['Firefox',   45.0],
-                        ['IE',       26.8],
-                        {
-                            name: 'Chrome',
-                            y: 12.8,
-                            sliced: true,
-                            selected: true
-                        },
-                        {
-                            name: 'Safari',
-                            y: 8.5,
-                            sliced: true,
-                            selected: true
-                        },
-                        ['Opera',     6.2],
-                        ['Others',   0.7]
-                    ]
-                }]
-            });
-        }); //closes function
-*/
+                color: 'white',
+                distance: -30
+            }
+        }]
+    });
+});
 
 
+        });//closes getJSON
       }); //closes readyfunction
     </script>
   </head>
   <body>
+
+<div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
+
+
   </body>
 </html>
