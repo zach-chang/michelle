@@ -49,12 +49,7 @@
 
           });
         })
-	    	//addMarkerToMap(city)
-	    	var marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(80.2751828, 13.081604),
-	        map: map,
-	        title: 'Hello World!'
-	    	});//closes google maps marker  
+  
 	    })//closes SC.get response city
 	  }//closes ontimedcomments
 	});//closes stream
@@ -117,6 +112,15 @@
 
 	  map = new google.maps.Map(document.getElementById('map-canvas'),
 	      mapOptions);
+
+	    	//addMarkerToMap(city)
+	    	var marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(80.2751828, 13.081604),
+	        map: map,
+	        title: 'Hello World!'
+	    	});//closes google maps marker
+
+	    	
 
 	  var styledMapOptions = {
 	    name: 'Custom Style'
