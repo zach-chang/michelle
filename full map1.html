@@ -38,6 +38,20 @@
 	    	var city = response.city;
 	    	//console.log(comments[0].body,city)
 
+
+     $(document).ready(function () {
+
+        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city[i]+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
+
+        var latitude = results.geometry.location.lat;
+
+            console.log (latitude)
+
+          });
+        })
+
+
+
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: new google.maps.LatLng(-25.363882,131.044922),
