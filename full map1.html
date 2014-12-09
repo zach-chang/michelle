@@ -133,12 +133,12 @@
 	SC.stream("/tracks/293", {
 	  autoPlay: true,
 	  ontimedcomments: function(comments){
-	    console.log(comments[0]);
+	    //console.log(comments[0]);
 
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-
+	    	console.log(city[0])
 	    	//addMarkerToMap(city)
 	    })
 	  }
