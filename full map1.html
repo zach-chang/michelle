@@ -38,24 +38,23 @@
 	    	var city = response.city;
 	    	//console.log(comments[0].body,city)
 
-		     $(document).ready(function () {
+     $(document).ready(function () {
 
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
         	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
-			var location = new google.maps.LatLng(latitude,longitude);
+
             console.log (longitude,latitude)
+
+          });
+        })
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
-	        position: location,
+	        position: new google.maps.LatLng(80.2751828, 13.081604),
 	        map: map,
 	        title: 'Hello World!'
 	    	});//closes google maps marker  
-
-		        })//closes getJSON
-          });//closes readyfunction
-  
 	    })//closes SC.get response city
 	  }//closes ontimedcomments
 	});//closes stream
@@ -119,11 +118,6 @@
 	  map = new google.maps.Map(document.getElementById('map-canvas'),
 	      mapOptions);
 
-
-
-
-
-
 	  var styledMapOptions = {
 	    name: 'Custom Style'
 	  };
@@ -141,6 +135,7 @@
     <div id="map-canvas"></div>
   </body>
 </html>
+
 
 
 
