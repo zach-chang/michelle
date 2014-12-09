@@ -133,24 +133,25 @@
   	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
 	<script>
 	$(document).ready(function() {
-
 	SC.initialize({
   		client_id: 'd58ccfcabb9df6603086be7f94396604'
   		});
 	SC.get('/tracks/293/comments', function(comments) {
 	    $.each(comments, function(i, comment) {
-	      $('comments')
-	      });
+	      $('#comments').append(
+	        $('<li></li>').html(comment.body)
+	      );
 	    });
-
+	  });
 	SC.stream("/tracks/293", function(sound){
 		sound.play();
 	  });
-
 	});
+
 console.log(comments)
 
 	</script>
+
     <div id="map-canvas"></div>
   </body>
 </html>
