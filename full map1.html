@@ -3,80 +3,23 @@
 <html>
   <head>
     <title>Simple styled maps</title>
-      <style>
-      html, body, #map {
+    <style>
+      html, body {
         height: 100%;
         margin: 0px;
-        padding: 0px;
+        padding: 0px
       }
-      </style>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script> <!--JQUERY SCRIPT -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> <!--GOOGLE MAPS SCRIPT -->
-    <script> 
-
-      //START OF DRAW FUNCTION
-
-      var draw = function(id, mapOptions, positions) {
-
-      var map = new google.maps.Map(document.getElementById(id), mapOptions);
-
-      var myLatlng = new google.maps.LatLng(40.7293, -73.9906);
-
-      //set up some empty arrays to use
-      var markers = [];
-      var infoWindows = [];
-      var popUps = [];
-
-      //create all of the markers on the map
-      for (i in positions) {
-
-      // Adding a marker to the map
-        markers[i] = new google.maps.Marker({
-          position: positions[i].map,
-          map: map,
-          title: positions[i].title,
-          icon: 'http://png-3.findicons.com/files/icons/480/weather/32/sunny.png' //url to images
-          });
-
+      #map-canvas {
+      	height: 100%;
+      	position: fixed;
+      	top: 0;
+      	bottom: 0;
+      	left: 0;
+      	right: 0;
+      	z-index: 0;
       }
-
-       //loop through the markers, and add pop-up windows to them
-       for (i in markers) {
-
-      //create a template with two placeholder to replace
-      var popUpTemplate = '<div class="content"><a href="{{link}}">{{content}}</a></div>';
-
-      //replace the content placeholder
-      popUps[i] = popUpTemplate.replace('{{content}}', positions[i].title);
-
-      //replace the link placeholder
-      popUps[i] = popUps[i].replace('{{link}}', positions[i].link);
-
-      //create a new info window
-      infoWindows[i] = new google.maps.InfoWindow({
-      //the contents is the string-replaced template we created within this loop
-      content:popUps[i]
-      });
-
-      //when a marker is clicked on
-      google.maps.event.addListener(markers[i], 'click', function(innerKey) {
-      return function() {
-          //comment out the for loop persist each info window
-          for (j in markers) {
-            infoWindows[j].close(map, markers[j]);
-          }
-
-          //open the infoWindow related to the marker clicked on
-          infoWindows[innerKey].open(map, markers[innerKey]);
-      }
-    }(i));
-  }
-} //end of the initiazlize function
-
-    //END OF DRAW FUNCTION
-</script>
-
-
+    </style>
+ 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
  	<!--SOUND CLOUD STARTS HERE-->
   	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
 	<script>
@@ -99,29 +42,19 @@
 
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
-          var mapOptions = {
-          zoom: 2,
-          center: new google.maps.LatLng(40.7293, -73.9906) //centered at cooper, but zoomed to manhattan
-          };
-          var positions = [];
-
-            for(var i=0; i<response.length; i++) {
-              if(response[i].location != null) {
-                var latitude = response.results[0].geometry.location.lat;
+        	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
-console.log(latitude,longitude)
-                positions.push(
-                {
-                  'title':'Hello World',
-                  'map': new google.maps.LatLng(latitude, longitude),
-                  'icon': 'http://png-3.findicons.com/files/icons/480/weather/32/sunny.png'
-                });
-              };
-            };
-          draw('map', mapOptions, positions);  
 
-       }); //closes getJSON
-             }); //closes readyfunction
+            console.log (longitude,latitude)
+
+          });
+        })
+	    	//addMarkerToMap(city)
+	    	var marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(latitude,longitude),
+	        map: map,
+	        title: 'Hello World!'
+	    	});//closes google maps marker  
 	    })//closes SC.get response city
 	  }//closes ontimedcomments
 	});//closes stream
@@ -132,10 +65,74 @@ console.log(latitude,longitude)
 	</script>
 
 	<!--SOUND CLOUD ENDS-->
+	<!--GOOGLE MAPS BEGIN-->
 
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+	var map;
+	var usa = new google.maps.LatLng(37.6,-95.665);
+
+	var MY_MAPTYPE_ID = 'custom_style';
+
+	function initialize() {
+
+	  var featureOpts = [
+	    {
+	      stylers: [
+	        { visibility: 'simplified' },
+	        { gamma: 0.25 },
+	        { weight: 0.25 },
+	        { color: '#C8C8DA' },
+	        { lightness: 50 },
+	      ]
+	    },
+	    {
+	      elementType: 'labels',
+	      stylers: [
+	        { visibility: 'off' }
+	      ]
+	    },
+	    {
+	      featureType: 'road.local',
+	      stylers: [
+	        { visibility: 'off' }
+	      ]
+	    },
+	    {
+	      featureType: 'water',
+	      stylers: [
+	        { color: '#69696B' }
+	      ]
+	    }
+	  ];
+
+	  var mapOptions = {
+	    zoom: 4,
+	    center: usa,
+	    mapTypeControlOptions: {
+	      mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+	    },
+	    mapTypeId: MY_MAPTYPE_ID
+	  };
+
+	  map = new google.maps.Map(document.getElementById('map-canvas'),
+	      mapOptions);
+
+	  var styledMapOptions = {
+	    name: 'Custom Style'
+	  };
+
+	  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+	  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
   	</head>
   	<body>
-    <div id="map"></div>
+    <div id="map-canvas"></div>
   </body>
 </html>
 
