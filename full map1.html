@@ -46,15 +46,13 @@
         	var longitude = response.results[0].geometry.location.lng;
 
             console.log (longitude,latitude)
-
-          });
-        })
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: new google.maps.latitude+longitude,
 	        map: map,
 	        title: 'Hello World!'
 	    	});//closes google maps marker  
+
 		        })//closes getJSON
           });//closes readyfunction
   
