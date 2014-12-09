@@ -100,7 +100,7 @@
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-	    	console.log(comments,city)
+	    	console.log(comments[0].body,city)
 	    	//addMarkerToMap(city)
 	    var marker = new google.maps.Marker({
 	        position: new google.maps.LatLng(-25.363882,131.044922),
