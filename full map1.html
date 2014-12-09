@@ -49,12 +49,7 @@
 
           });
         })
-	    	//addMarkerToMap(city)
-	    	var marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(latitude[0],longitude[0]),
-	        map: map,
-	        title: 'Hello World!'
-	    	});//closes google maps marker  
+
 	    })//closes SC.get response city
 	  }//closes ontimedcomments
 	});//closes stream
@@ -63,7 +58,6 @@
 	  });
 	});//closes readyfunction
 	</script>
-
 	<!--SOUND CLOUD ENDS-->
 	<!--GOOGLE MAPS BEGIN-->
 
@@ -124,6 +118,13 @@
 
 	  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
 
+	    	//addMarkerToMap(city)
+	    	var marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(latitude,longitude),
+	        map: map,
+	        title: 'Hello World!'
+	    	});//closes google maps marker  
+	    	
 	  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 	}
 
