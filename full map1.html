@@ -138,20 +138,17 @@
   		});
 	SC.get('/tracks/293/comments', function(comments) {
 	    $.each(comments, function(i, comment) {
-	      $('#comments').append(
-	        $('<li></li>').html(comment.body)
-	      );
+	      $('#comments')
+	      });
 	    });
 	  });
 	SC.stream("/tracks/293", function(sound){
 		sound.play();
 	  });
 	});
-
+console.log('#comments')
 
 	</script>
-
-	<ul id="comments"></ul>
     <div id="map-canvas"></div>
   </body>
 </html>
