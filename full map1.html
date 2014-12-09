@@ -66,7 +66,7 @@
     <script>
 
 	var map;
-	var usa = new google.maps.LatLng(37.6,-95.665);
+	var ocean = new google.maps.LatLng(37.6,-95.665);
 	var MY_MAPTYPE_ID = 'custom_style';
 	function initialize() {
 	  var featureOpts = [
@@ -99,8 +99,8 @@
 	    }
 	  ];
 	  var mapOptions = {
-	    zoom: 4,
-	    center: usa,
+	    zoom: 2,
+	    center: ocean,
 	    mapTypeControlOptions: {
 	      mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
 	    },
