@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple styled maps</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      #map-canvas {
+      	height: 100%;
+      	position: fixed;
+      	top: 0;
+      	bottom: 0;
+      	left: 0;
+      	right: 0;
+      	z-index: 0;
+      }
+    </style>
+    
+	<script src="http://connect.soundcloud.com/sdk.js"></script>
+	<script>
+	SC.initialize({
+	  client_id: 'd58ccfcabb9df6603086be7f94396604'
+	});
+	// stream track id 293
+	SC.stream("/tracks/293", function(sound){
+	  sound.play();
+	});
+	</script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+	var map;
+	var usa = new google.maps.LatLng(37.6,-95.665);
+
+	var MY_MAPTYPE_ID = 'custom_style';
+
+	function initialize() {
+
+	  var featureOpts = [
+	    {
+	      stylers: [
+	        { visibility: 'simplified' },
+	        { gamma: 0.25 },
+	        { weight: 0.25 },
+	        { color: '#C8C8DA' },
+	        { lightness: 50 },
+	      ]
+	    },
+	    {
+	      elementType: 'labels',
+	      stylers: [
+	        { visibility: 'off' }
+	      ]
+	    },
+	    {
+	      featureType: 'road.local',
+	      stylers: [
+	        { visibility: 'off' }
+	      ]
+	    },
+	    {
+	      featureType: 'water',
+	      stylers: [
+	        { color: '#69696B' }
+	      ]
+	    }
+	  ];
+
+	  var mapOptions = {
+	    zoom: 4,
+	    center: usa,
+	    mapTypeControlOptions: {
+	      mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+	    },
+	    mapTypeId: MY_MAPTYPE_ID
+	  };
+
+
+
+
+
+
+
+	  map = new google.maps.Map(document.getElementById('map-canvas'),
+	      mapOptions);
+
+	  var styledMapOptions = {
+	    name: 'Custom Style'
+	  };
+
+	  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+	  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+
+	/*
+	  // Load GeoJSON.
+	  map.data.loadGeoJson('https://storage.googleapis.com/maps-devrel/google.json');
+
+
+	  // [START snippet]
+	  // Color each letter gray. Change the color when the isColorful property
+	  // is set to true.
+	  map.data.setStyle(function(feature) {
+	    var color = 'gray';
+	    if (feature.getProperty('isColorful')) {
+	      color = feature.getProperty('color');
+	    }
+	    return ({
+	      fillColor: color,
+	      strokeColor: color,
+	      strokeWeight: 2
+	    });
+	  });
+
+	  // When the user clicks, set 'isColorful', changing the color of the letters.
+	  map.data.addListener('click', function(event) {
+	    event.feature.setProperty('isColorful', true);
+	  });
+
+	  // When the user hovers, tempt them to click by outlining the letters.
+	  // Call revertStyle() to remove all overrides. This will use the style rules
+	  // defined in the function passed to setStyle()
+	  map.data.addListener('mouseover', function(event) {
+	    map.data.revertStyle();
+	    map.data.overrideStyle(event.feature, {strokeWeight: 8});
+	  });
+
+	  map.data.addListener('mouseout', function(event) {
+	    map.data.revertStyle();
+	  });
+	  // [END snippet]
+	*/
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+  </head>
+  <body>
+ <!--   <div id="map-canvas"></div> 
+    <div id="player"></div> -->
+  </body>
+</html>
+
+
+
