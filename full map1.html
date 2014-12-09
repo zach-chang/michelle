@@ -19,18 +19,6 @@
       	z-index: 0;
       }
     </style>
-    
-	<script src="http://connect.soundcloud.com/sdk.js"></script>
-	<script>
-	SC.initialize({
-	  client_id: 'd58ccfcabb9df6603086be7f94396604'
-	});
-	// stream track id 293
-	SC.stream("/tracks/293", function(sound){
-	  sound.play();
-	});
-	</script>
-
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 	var map;
@@ -140,6 +128,16 @@
 
     </script>
 
+	<script src="http://connect.soundcloud.com/sdk.js"></script>
+	<script>
+	SC.initialize({
+	  client_id: 'd58ccfcabb9df6603086be7f94396604'
+	});
+	// stream track id 293
+	SC.stream("/tracks/293", function(sound){
+	  sound.play();
+	});
+	</script>
   </head>
   <body>
  <!--   <div id="map-canvas"></div> 
