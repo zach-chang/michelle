@@ -19,8 +19,50 @@
       	z-index: 0;
       }
     </style>
+
+  	</head>
+  	<body>
+  	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
+	<script>
+	$(document).ready(function() {
+
+          	SC.initialize({
+  		client_id: 'd58ccfcabb9df6603086be7f94396604'
+  		});//closes SC.initialize
+	SC.stream("/tracks/293", {
+	  autoPlay: true,
+	  ontimedcomments: function(comments){
+	    //console.log(comments[0]);
+
+	    var user_id = comments[0].user_id;
+	    SC.get('/users/'+user_id, {"limit":1}, function(response){
+	    	var city = response.city;
+	    	console.log(comments[0].body,city)
+
+
+
+
+	    	//addMarkerToMap(city)
+	    	var marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(-25.363882,131.044922),
+	        map: map,
+	        title: 'Hello World!'
+	    });//closes google maps marker  
+
+	    })//closes SC.get response city
+	  }//closes ontimedcomments
+	});//closes stream
+	SC.stream("/tracks/293", function(sound){
+		sound.play();
+	  });
+	});//closes readyfunction
+	</script>
+
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
+    //start the geocoder geocoder;
+    geocoder = new google.maps.Geocoder();
 
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
@@ -83,45 +125,9 @@
 	google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
-  	</head>
-  	<body>
-  	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-  	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
-	<script>
-	$(document).ready(function() {
-		
-          	SC.initialize({
-  		client_id: 'd58ccfcabb9df6603086be7f94396604'
-  		});//closes SC.initialize
-	SC.stream("/tracks/293", {
-	  autoPlay: true,
-	  ontimedcomments: function(comments){
-	    //console.log(comments[0]);
-
-	    var user_id = comments[0].user_id;
-	    SC.get('/users/'+user_id, {"limit":1}, function(response){
-	    	var city = response.city;
-	    	console.log(comments[0].body,city)
 
 
-
-
-
-	    	//addMarkerToMap(city)
-	    	var marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(-25.363882,131.044922),
-	        map: map,
-	        title: 'Hello World!'
-	    });//closes google maps marker  
-
-	    })//closes SC.get response city
-	  }//closes ontimedcomments
-	});//closes stream
-	SC.stream("/tracks/293", function(sound){
-		sound.play();
-	  });
-	});//closes readyfunction
-	</script>
+	
     <div id="map-canvas"></div>
   </body>
 </html>
