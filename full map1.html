@@ -133,7 +133,7 @@
 	SC.stream("/tracks/293", {
 	  autoPlay: true,
 	  ontimedcomments: function(comments){
-	    console.log(comments[0].body);
+	    console.log(comments[0].body, user[0].body);
 	  }
 	});
 	SC.stream("/tracks/293", function(sound){
@@ -145,5 +145,7 @@
   </body>
 </html>
 
-<!--objective: get comment users' city, tag it on the map real-time with music-->
+<!--objective: get comment users' city, tag it on the map real-time with music
+	might need this site for geocoding cities: https://developers.google.com/maps/documentation/geocoding/#Geocoding
+-->
 
