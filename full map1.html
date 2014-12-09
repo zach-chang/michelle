@@ -141,7 +141,6 @@
 	      $('#comments').append(
 	        $('<li></li>').html(comment.body)
 	      );
-	      console.log(comments)
 	    });
 	  });
 	SC.stream("/tracks/293", function(sound){
@@ -150,9 +149,9 @@
 	});
 
 
-
 	</script>
 
+	<ul id="comments"></ul>
     <div id="map-canvas"></div>
   </body>
 </html>
