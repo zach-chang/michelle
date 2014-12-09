@@ -50,20 +50,12 @@
               if(response[i].location != null) {
                 var latitude = response[i].location.latitude;
                 var longitude = response[i].location.longitude;
-
+		    	//addMarkerToMap(city)
 		    	var marker = new google.maps.Marker({
-		        position: [],
+		        position: new google.maps.LatLng(latitude[i],longitude[i]),
 		        map: map,
 		        title: 'Hello World!'
-		    	});
-
-
-                positions.push(
-                {
-		        position: new google.maps.LatLng(latitude, longitude),
-		        map: map,
-		        title: 'Hello World!'
-		    	});
+		    	});//closes google maps marker 
                 };//closes if
               }; //closesfor
             }
