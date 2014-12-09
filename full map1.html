@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,7 +23,6 @@
   	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
 	<script>
 	$(document).ready(function() {
-
         SC.initialize({
   		client_id: 'd58ccfcabb9df6603086be7f94396604'
   		});//closes SC.initialize
@@ -32,16 +30,12 @@
 	  	autoPlay: true,
 	  	ontimedcomments: function(comments){
 	    //console.log(comments[0]);
-
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
 	    	//console.log(comments[0].body,city)
-
 		     $(document).ready(function () {
-
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
-
         	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
 			var location = new google.maps.LatLng(latitude,longitude);
@@ -49,10 +43,8 @@
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: location,
-	        map: map,
-	        title: 'Hello World!'
+	        map: map
 	    	});//closes google maps marker  
-
 		        })//closes getJSON
           });//closes readyfunction
   
@@ -72,11 +64,8 @@
     <script>
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
-
 	var MY_MAPTYPE_ID = 'custom_style';
-
 	function initialize() {
-
 	  var featureOpts = [
 	    {
 	      stylers: [
@@ -106,7 +95,6 @@
 	      ]
 	    }
 	  ];
-
 	  var mapOptions = {
 	    zoom: 4,
 	    center: usa,
@@ -115,44 +103,18 @@
 	    },
 	    mapTypeId: MY_MAPTYPE_ID
 	  };
-
 	  map = new google.maps.Map(document.getElementById('map-canvas'),
 	      mapOptions);
-
-
-
-
-
-
 	  var styledMapOptions = {
 	    name: 'Custom Style'
 	  };
-
 	  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
-
 	  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 	}
-
 	google.maps.event.addDomListener(window, 'load', initialize);
-
     </script>
   	</head>
   	<body>
     <div id="map-canvas"></div>
   </body>
 </html>
-
-
-
-<!--objective: get comment users' city, tag it on the map real-time with music
-	might need this site for geocoding cities: 
-
-	https://developers.google.com/maps/documentation/geocoding/#Geocoding
-
-	API KEY: AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY
-
-	for example: https://maps.googleapis.com/maps/api/geocode/json?address=Berlin&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY
-
-	or this might be helpful: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
--->
-
