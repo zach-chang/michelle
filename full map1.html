@@ -42,14 +42,13 @@
 
 		        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
-		        	var latitude = response.results[0].geometry.location.lat;
-		        	var longitude = response.results[0].geometry.location.lng;
+
 
 
 		            for(var i=0; i<response.length; i++) {
 		              if(response[i].location != null) {
-		                var latitude = response[i].location.latitude;
-		                var longitude = response[i].location.longitude;
+		        	var latitude = response.results[0].geometry.location.lat;
+		        	var longitude = response.results[0].geometry.location.lng;
 				    	//addMarkerToMap(city)
 				    	var marker = new google.maps.Marker({
 				        position: new google.maps.LatLng(latitude[i],longitude[i]),
