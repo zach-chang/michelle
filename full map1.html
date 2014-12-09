@@ -134,6 +134,11 @@
 	  autoPlay: true,
 	  ontimedcomments: function(comments){
 	    console.log(comments[0]);
+
+	    var user_id = comments[0].user_id;
+	    SC.get('/users/'+user_id, {"limit":1}, function(response){
+	    	console.log(response);
+	    })
 	  }
 	});
 	SC.stream("/tracks/293", function(sound){
