@@ -40,21 +40,23 @@
 
 		     $(document).ready(function () {
 
-		        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
+        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
-		            for(var i=0; i<response.length; i++) {
-		        	var latitude = response.results[0].geometry.location.lat;
-		        	var longitude = response.results[0].geometry.location.lng;
-					  console.log(latitude,longitude)				    	//addMarkerToMap(city)
-					var marker = new google.maps.Marker({
-					      position: (latitude,longitude),
-					      map: map,
-					      title: 'Hello World!'
-					  });//closes google maps marker 
+        	var latitude = response.results[0].geometry.location.lat;
+        	var longitude = response.results[0].geometry.location.lng;
 
-		              }; //closesfor
+            console.log (longitude,latitude)
 
-		            })//closes getJSON
+          });
+        })
+	    	//addMarkerToMap(city)
+	    	var marker = new google.maps.Marker({
+	        position: new google.maps.latitude,longitude,
+	        map: map,
+	        title: 'Hello World!'
+	    	});//closes google maps marker  
+		            }; //closesfor
+		        })//closes getJSON
 
           });//closes readyfunction
   
