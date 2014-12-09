@@ -43,7 +43,7 @@
 
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city[0]+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
-        var latitude = results.geometry.location.lat;
+        var latitude = results[0].geometry.location.lat;
 
             console.log (latitude)
 
