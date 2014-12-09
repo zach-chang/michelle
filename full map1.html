@@ -36,7 +36,7 @@
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-	    	console.log(comments[0].body,city)
+	    	//console.log(comments[0].body,city)
 
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
@@ -58,37 +58,31 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
+              //start the geocoder geocoder;
+          geocoder = new google.maps.Geocoder();
+
+
+          function codeAddress(location) {
+            if(location !== null) {
+              var address = location.address;
+            } else {
+              var address = $("#address")[0].value;
+            }
+            console.log(address)
+            geocoder.geocode( { 'address': address}, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.B;
+                var longitude = results[0].geometry.location.k;
+                console.log(latitude, longitude);
+              } else {
+                alert("Geocode was not successful for the following reason: " + status);
+              }
+            });
+          };
+
+
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
-
-var addressArray = new Array("41 Green Ln, Handsworth, Birmingham, West Midlands B21 0DE, UK","BT27 4SB","Norwich");
-02.
-var geocoder = new google.maps.Geocoder();
-03.
- 
-04.
-for (var i = 0; i < addressArray.length; i++) {
-05.
-geocoder.geocode( { 'address': addressArray[i]}, function(results, status) {
-06.
-if (status == google.maps.GeocoderStatus.OK) {
-07.
-var marker = new google.maps.Marker({
-08.
-map: map,
-09.
-position: results[0].geometry.location
-10.
-});
-11.
-} else {
-12.
-alert("Geocode was not successful for the following reason: " + status);
-13.
-}
-14.
-});
-
 
 	var MY_MAPTYPE_ID = 'custom_style';
 
