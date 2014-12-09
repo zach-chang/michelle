@@ -89,12 +89,7 @@
   	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
 	<script>
 	$(document).ready(function() {
-
-		$.getJSON("http://maps.googleapis.com/maps/api/geocode/json?address=BERLIN&sensor=false
-", function(response){
-
-          console.log(response.results.geometry.location.lat); 
-          }
+		
           	SC.initialize({
   		client_id: 'd58ccfcabb9df6603086be7f94396604'
   		});//closes SC.initialize
