@@ -140,8 +140,7 @@
 	});
 
 	//accessing comments
-	$(document).ready(function() {
-	  SC.get('/tracks/293/comments', function(comments) {
+	SC.get('/tracks/293/comments', function(comments) {
 	    $.each(comments, function(i, comment) {
 	      $('#comments').append(
 	        $('<li></li>').html(comment.body)
@@ -149,7 +148,6 @@
 	    });
 	  });
 	});
-
 
 
     </script>
