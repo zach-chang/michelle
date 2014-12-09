@@ -40,10 +40,18 @@
         	var longitude = response.results[0].geometry.location.lng;
 			var location = new google.maps.LatLng(latitude,longitude);
             console.log (longitude,latitude)
+
+
+
+  			var image = 'circle.png';
+
+
+
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: location,
-	        map: map
+	        map: map,
+	        icon: image
 	    	});//closes google maps marker  
 		        })//closes getJSON
           });//closes readyfunction
