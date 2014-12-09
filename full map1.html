@@ -34,34 +34,12 @@
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
     	    	//console.log(comments[0].body,city)
-		     $(document).ready(function addlocation(event) {
+		     $(document).ready(function () {
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
         	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
 			var location = new google.maps.LatLng(latitude,longitude);
             //console.log (longitude,latitude)
-	var poly;
-  var polyOptions = {
-    strokeColor: '#000000',
-    strokeOpacity: 1.0,
-    strokeWeight: 3
-  };
-  poly = new google.maps.Polyline(polyOptions);
-  poly.setMap(map);
-
-  var path = poly.getPath();
-
-  // Because path is an MVCArray, we can simply append a new coordinate
-  // and it will automatically appear.
-  path.push(event.location);
-
-  // Add a new marker at the new plotted point on the polyline.
-  var marker = new google.maps.Marker({
-    position: event.location,
-    title: '#' + path.getLength(),
-    map: map
-  });
-
 
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
@@ -88,10 +66,6 @@
     <script>
 
 	var map;
-
-  poly = new google.maps.Polyline(polyOptions);
-  poly.setMap(map);
-
 	var ocean = new google.maps.LatLng(59.164796, -46.382024);
 	var MY_MAPTYPE_ID = 'custom_style';
 	function initialize() {
@@ -148,4 +122,4 @@
   </body>
 </html>
 
-<!--next steps: better markers, maybe with lines, play pause soundcloud, 
+<!--next steps: better markers, maybe with lines, play pause soundcloud, comments 
