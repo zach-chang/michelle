@@ -21,6 +21,7 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
+
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
 
@@ -77,45 +78,6 @@
 	  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
 
 	  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
-
-	/*
-	  // Load GeoJSON.
-	  map.data.loadGeoJson('https://storage.googleapis.com/maps-devrel/google.json');
-
-
-	  // [START snippet]
-	  // Color each letter gray. Change the color when the isColorful property
-	  // is set to true.
-	  map.data.setStyle(function(feature) {
-	    var color = 'gray';
-	    if (feature.getProperty('isColorful')) {
-	      color = feature.getProperty('color');
-	    }
-	    return ({
-	      fillColor: color,
-	      strokeColor: color,
-	      strokeWeight: 2
-	    });
-	  });
-
-	  // When the user clicks, set 'isColorful', changing the color of the letters.
-	  map.data.addListener('click', function(event) {
-	    event.feature.setProperty('isColorful', true);
-	  });
-
-	  // When the user hovers, tempt them to click by outlining the letters.
-	  // Call revertStyle() to remove all overrides. This will use the style rules
-	  // defined in the function passed to setStyle()
-	  map.data.addListener('mouseover', function(event) {
-	    map.data.revertStyle();
-	    map.data.overrideStyle(event.feature, {strokeWeight: 8});
-	  });
-
-	  map.data.addListener('mouseout', function(event) {
-	    map.data.revertStyle();
-	  });
-	  // [END snippet]
-	*/
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
@@ -138,8 +100,15 @@
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-	    	console.log(city)
+	    	console.log(comments,city)
 	    	//addMarkerToMap(city)
+	    var marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(-25.363882,131.044922),
+	        map: map,
+	        title: 'Hello World!'
+	    });	    
+
+
 	    })
 	  }
 	});
