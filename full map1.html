@@ -41,18 +41,10 @@
 			var location = new google.maps.LatLng(latitude,longitude);
             console.log (longitude,latitude)
 
-
-
-  			var image = {
-  				url: 'circle.png',
-				size: new google.maps.Size(100, 100),
-			};
-
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: location,
 	        map: map,
-	        icon: image
 	    	});//closes google maps marker  
 		        })//closes getJSON
           });//closes readyfunction
