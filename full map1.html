@@ -46,8 +46,9 @@
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
         	var latitude = response.results[0].geometry.location.lat;
+        	var longitude = response.results[0].geometry.location.lng;
 
-            console.log (latitude)
+            console.log (longitude,latitude)
 
           });
         })
