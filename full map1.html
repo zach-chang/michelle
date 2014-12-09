@@ -133,7 +133,7 @@
 	SC.stream("/tracks/293", {
 	  autoPlay: true,
 	  ontimedcomments: function(comments){
-	    console.log(comments[0].body);
+	    console.log(comments[0]);
 	  }
 	});
 	SC.stream("/tracks/293", function(sound){
@@ -146,6 +146,14 @@
 </html>
 
 <!--objective: get comment users' city, tag it on the map real-time with music
-	might need this site for geocoding cities: https://developers.google.com/maps/documentation/geocoding/#Geocoding
+	might need this site for geocoding cities: 
+
+	https://developers.google.com/maps/documentation/geocoding/#Geocoding
+
+	API KEY: AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY
+
+	for example: https://maps.googleapis.com/maps/api/geocode/json?address=Berlin&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY
+
+	or this might be helpful: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
 -->
 
