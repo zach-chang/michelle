@@ -46,27 +46,30 @@
         	var longitude = response.results[0].geometry.location.lng;
 
 
-
-          var positions = [];
-
             for(var i=0; i<response.length; i++) {
               if(response[i].location != null) {
                 var latitude = response[i].location.latitude;
                 var longitude = response[i].location.longitude;
 
+		    	var marker = new google.maps.Marker({
+		        position: [],
+		        map: map,
+		        title: 'Hello World!'
+		    	});
+
+
                 positions.push(
                 {
-		    	var marker = new google.maps.Marker({
 		        position: new google.maps.LatLng(latitude, longitude),
 		        map: map,
 		        title: 'Hello World!'
 		    	});
-                });
-              };
+                });//closes if
+              }; //closesfor
             };
 
 
-            
+
             console.log (longitude,latitude)
 
           });
