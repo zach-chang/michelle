@@ -33,13 +33,13 @@
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-	    	//console.log(comments[0].body,city)
+
 		     $(document).ready(function () {
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
         	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
 			var location = new google.maps.LatLng(latitude,longitude);
-            console.log (longitude,latitude)
+            //console.log (longitude,latitude)
 
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
@@ -59,10 +59,12 @@
 	</script>
 
 	<!--SOUND CLOUD ENDS-->
+
 	<!--GOOGLE MAPS BEGIN-->
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
+    	    	console.log(comments[0].body,city)
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
 	var MY_MAPTYPE_ID = 'custom_style';
