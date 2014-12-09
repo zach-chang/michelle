@@ -20,16 +20,17 @@
       }
     </style>
  	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+ 	<!--SOUND CLOUD STARTS HERE-->
   	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
 	<script>
 	$(document).ready(function() {
 
-          	SC.initialize({
+        SC.initialize({
   		client_id: 'd58ccfcabb9df6603086be7f94396604'
   		});//closes SC.initialize
-	SC.stream("/tracks/293", {
-	  autoPlay: true,
-	  ontimedcomments: function(comments){
+		SC.stream("/tracks/293", {
+	  	autoPlay: true,
+	  	ontimedcomments: function(comments){
 	    //console.log(comments[0]);
 
 	    var user_id = comments[0].user_id;
@@ -37,16 +38,12 @@
 	    	var city = response.city;
 	    	console.log(comments[0].body,city)
 
-
-
-
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: new google.maps.LatLng(-25.363882,131.044922),
 	        map: map,
 	        title: 'Hello World!'
-	    });//closes google maps marker  
-
+	    	});//closes google maps marker  
 	    })//closes SC.get response city
 	  }//closes ontimedcomments
 	});//closes stream
@@ -56,13 +53,42 @@
 	});//closes readyfunction
 	</script>
 
+	<!--SOUND CLOUD ENDS-->
+	<!--GOOGLE MAPS BEGIN-->
+
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
-    //start the geocoder geocoder;
-    geocoder = new google.maps.Geocoder();
-
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
+
+var addressArray = new Array("41 Green Ln, Handsworth, Birmingham, West Midlands B21 0DE, UK","BT27 4SB","Norwich");
+02.
+var geocoder = new google.maps.Geocoder();
+03.
+ 
+04.
+for (var i = 0; i < addressArray.length; i++) {
+05.
+geocoder.geocode( { 'address': addressArray[i]}, function(results, status) {
+06.
+if (status == google.maps.GeocoderStatus.OK) {
+07.
+var marker = new google.maps.Marker({
+08.
+map: map,
+09.
+position: results[0].geometry.location
+10.
+});
+11.
+} else {
+12.
+alert("Geocode was not successful for the following reason: " + status);
+13.
+}
+14.
+});
+
 
 	var MY_MAPTYPE_ID = 'custom_style';
 
@@ -127,7 +153,7 @@
  
 
 
-	
+
     <div id="map-canvas"></div>
   </body>
 </html>
