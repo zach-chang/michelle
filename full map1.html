@@ -58,48 +58,6 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
-              //start the geocoder geocoder;
-          geocoder = new google.maps.Geocoder();
-
-
-          function codeAddress(location) {
-            if(location !== null) {
-              var address = location.address;
-            } else {
-              var address = $("#address")[0].value;
-            }
-            console.log(address)
-            geocoder.geocode( { 'address': address}, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                var latitude = results[0].geometry.location.B;
-                var longitude = results[0].geometry.location.k;
-                console.log(latitude, longitude);
-              } else {
-                alert("Geocode was not successful for the following reason: " + status);
-              }
-            });
-          };
-
-          var locationsArray = window.location.search.substring(1, window.location.search.length).split("&");
-          //create a holding object
-          var location = {};
-          //loop through the array of items from the url
-          for(i in locationsArray){
-            var locationItem = locationsArray[i].split("=");
-            //add the key/value pair to the locations object
-            location[locationItem[0]] = decodeURI(locationItem[1]);
-          }
-          //run the function if the url has been set with ?address=somewhere
-          if("address" in location) {
-            codeAddress(location);
-          }
-          //attach the click event to the button
-          //run the codeAddress function when pressed
-          $("#encode").click(function(){
-            codeAddress(null);
-          });
-
-
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
 
@@ -163,13 +121,6 @@
     </script>
   	</head>
   	<body>
- 
-
-<div>
-	      <input id="address" type="textbox" value="Brooklyn, NY">
-      <input id="encode" type="button" value="Encode">
-  </div>
-
     <div id="map-canvas"></div>
   </body>
 </html>
