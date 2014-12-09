@@ -40,8 +40,14 @@
         	var longitude = response.results[0].geometry.location.lng;
 			var location = new google.maps.LatLng(latitude,longitude);
             //console.log (longitude,latitude)
-
-
+	var poly;
+  var polyOptions = {
+    strokeColor: '#000000',
+    strokeOpacity: 1.0,
+    strokeWeight: 3
+  };
+  poly = new google.maps.Polyline(polyOptions);
+  poly.setMap(map);
 
   var path = poly.getPath();
 
@@ -80,14 +86,9 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
-	var poly;
+
 	var map;
 
-  var polyOptions = {
-    strokeColor: '#000000',
-    strokeOpacity: 1.0,
-    strokeWeight: 3
-  };
   poly = new google.maps.Polyline(polyOptions);
   poly.setMap(map);
 
