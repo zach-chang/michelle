@@ -43,18 +43,17 @@
 		        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
 
-
-
 		            for(var i=0; i<response.length; i++) {
 		              if(response[i].location != null) {
 		        	var latitude = response.results[0].geometry.location.lat;
 		        	var longitude = response.results[0].geometry.location.lng;
 				    	//addMarkerToMap(city)
-				    	var marker = new google.maps.Marker({
-				        position: new google.maps.LatLng(latitude[i],longitude[i]),
-				        map: map,
-				        title: 'Hello World!'
-				    	});//closes google maps marker 
+					  var marker = new google.maps.Marker({
+					      position: (latitude,longitude),
+					      map: map,
+					      title: 'Hello World!'
+					   console.log(latitude,longitude)
+					  });//closes google maps marker 
 		                };//closes if
 		              }; //closesfor
 		            })//closes getJSON
