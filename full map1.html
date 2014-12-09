@@ -80,6 +80,25 @@
             });
           };
 
+          var locationsArray = window.location.search.substring(1, window.location.search.length).split("&");
+          //create a holding object
+          var location = {};
+          //loop through the array of items from the url
+          for(i in locationsArray){
+            var locationItem = locationsArray[i].split("=");
+            //add the key/value pair to the locations object
+            location[locationItem[0]] = decodeURI(locationItem[1]);
+          }
+          //run the function if the url has been set with ?address=somewhere
+          if("address" in location) {
+            codeAddress(location);
+          }
+          //attach the click event to the button
+          //run the codeAddress function when pressed
+          $("#encode").click(function(){
+            codeAddress(null);
+          });
+
 
 	var map;
 	var usa = new google.maps.LatLng(37.6,-95.665);
@@ -146,7 +165,10 @@
   	<body>
  
 
-
+<div>
+	      <input id="address" type="textbox" value="Brooklyn, NY">
+      <input id="encode" type="button" value="Encode">
+  </div>
 
     <div id="map-canvas"></div>
   </body>
