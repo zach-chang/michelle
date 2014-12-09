@@ -111,43 +111,26 @@
 
 
 
-      $(document).ready(function(){
+     $(document).ready(function () {
 
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
 
-          console.log(response.length); 
+        	var latitude = response.results[0].geometry.location.lat;
+        	var longitude = response.results[0].geometry.location.lng;
 
-          var mapOptions = {
-          zoom: 12,
-          center: new google.maps.LatLng(40.7293, -73.9906) //centered at cooper, but zoomed to manhattan
-          };
-          var positions = [];
+            console.log (longitude,latitude)
 
-            for(var i=0; i<response.length; i++) {
-              if(response[i].location != null) {
-	        	var latitude = response.results[0].geometry.location.lat;
-	        	var longitude = response.results[0].geometry.location.lng;
-
-                positions.push(
-                {
-                  'title':'Hello World!',
-                  'map': new google.maps.LatLng(latitude, longitude),
-                });
-              };
-            };
-          draw('map', mapOptions, positions);  
-
-       }); //closes getJSON
-
-     }); //closes readyfunction
+          });
+        })
+	    	//addMarkerToMap(city)
+	    	var marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(latitude,longitude),
+	        map: map,
+	        title: 'Hello World!'
+	    	});//closes google maps marker  
 
 
-
-
-
-
-
-
+	    	
 	google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
