@@ -44,11 +44,11 @@
 
         	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
-
+			var location = new google.maps.LatLng(latitude,longitude);
             console.log (longitude,latitude)
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
-	        position: new google.maps.latitude+longitude,
+	        position: location,
 	        map: map,
 	        title: 'Hello World!'
 	    	});//closes google maps marker  
