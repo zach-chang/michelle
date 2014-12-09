@@ -28,7 +28,7 @@
         SC.initialize({
   		client_id: 'd58ccfcabb9df6603086be7f94396604'
   		});//closes SC.initialize
-		SC.stream("/tracks/293", {
+		SC.stream("/tracks/127337725", {
 	  	autoPlay: true,
 	  	ontimedcomments: function(comments){
 	    //console.log(comments[0]);
@@ -58,7 +58,7 @@
 	    })//closes SC.get response city
 	  }//closes ontimedcomments
 	});//closes stream
-	SC.stream("/tracks/293", function(sound){
+	SC.stream("/tracks/127337725", function(sound){
 		sound.play();
 	  });
 	});//closes readyfunction
@@ -135,6 +135,10 @@
     <div id="map-canvas"></div>
   </body>
 </html>
+
+
+
+
 
 <!--objective: get comment users' city, tag it on the map real-time with music
 	might need this site for geocoding cities: 
