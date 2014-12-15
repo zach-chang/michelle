@@ -17,6 +17,10 @@
       	right: 0;
       	z-index: 0;
       }
+      .comments {
+      	font-family: helvetica;
+      	font-size: 12pt;
+      }
     </style>
  	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
  	<!--SOUND CLOUD STARTS HERE-->
@@ -26,17 +30,21 @@
         SC.initialize({
   		client_id: 'd58ccfcabb9df6603086be7f94396604'
   		});//closes SC.initialize
+
 		SC.stream("/tracks/127337725", {
 	  	autoPlay: true,
 	  	ontimedcomments: function(comments){
+
 	    //console.log(comments[0]);
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
 	    	var comments = comments.body;
-
+	    	$("body").append("<div class = 'comments'>" + comments + "</div>");
     	    console.log(comments[0].body,city)
+
 		     $(document).ready(function () {
+
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
         	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
