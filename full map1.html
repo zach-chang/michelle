@@ -26,9 +26,17 @@
         SC.initialize({
   		client_id: 'd58ccfcabb9df6603086be7f94396604'
   		});//closes SC.initialize
+/*
 		SC.stream("/tracks/127337725", {
 	  	autoPlay: true,
+
+*/
+    SC.get('/tracks/127337725', function(track){
+        SC.oEmbed(track.permalink_url, document.getElementById('player'));
+
+
 	  	ontimedcomments: function(comments){
+
 	    //console.log(comments[0]);
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
@@ -42,7 +50,6 @@
 			var comments = comments.body;
             console.log (longitude,latitude)
 
-
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: location,
@@ -52,6 +59,25 @@
 		        })//closes getJSON
           });//closes readyfunction
   
+
+
+
+
+
+  <!doctype html>
+<html>
+    <head>
+        <script src="//connect.soundcloud.com/sdk.js"></script>
+        <script src="script.js"></script>
+    </head>
+    <body>
+      <div id="player"></div>  
+    </body>
+</html>
+
+
+
+
 	    })//closes SC.get response city
 	  }//closes ontimedcomments
 	});//closes stream
@@ -121,6 +147,7 @@
     </script>
   	</head>
   	<body>
+    <div id="player"></div>  
     <div id="map-canvas"></div>
   </body>
 </html>
