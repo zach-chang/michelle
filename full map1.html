@@ -33,19 +33,20 @@
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-    	    	console.log(comments[0].body,city)
-		     $(document).ready(function () {
+    	    console.log(comments[0].body,city)
+		    $(document).ready(function () {
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
         	var latitude = response.results[0].geometry.location.lat;
         	var longitude = response.results[0].geometry.location.lng;
 			var location = new google.maps.LatLng(latitude,longitude);
-
+			var comments = comments[0].body;
             console.log (longitude,latitude)
 
 	    	//addMarkerToMap(city)
 	    	var marker = new google.maps.Marker({
 	        position: location,
 	        map: map,
+	        title:comments
 	    	});//closes google maps marker  
 		        })//closes getJSON
           });//closes readyfunction
