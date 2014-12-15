@@ -35,13 +35,13 @@
 	  	autoPlay: true,
 	  	ontimedcomments: function(comments){
 
-	    //console.log(comments[0]);
-	    //var user_id = comments[0].user_id;
+
+	    var user_id = comments[0].user_id;
 	    var comments = comments.body;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-	    	//$("body").append("<div class = 'comments'>" + comments + "</div>");
-    	    console.log(comments[0].body,city)
+		    	$("body").append("<div class = 'comments'>" + comments[0].body + "</div>");
+	    	    console.log(comments[0].body,city)
 
 		     $(document).ready(function () {
 
