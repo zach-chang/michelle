@@ -33,7 +33,6 @@
 	    var user_id = comments[0].user_id;
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
-	    	var comments = comments.body
     	    console.log(comments[0].body,city)
 		    $(document).ready(function () {
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
@@ -48,7 +47,6 @@
 	    	var marker = new google.maps.Marker({
 	        position: location,
 	        map: map,
-	        title: comments,
 
 	    	});//closes google maps marker  
 		        })//closes getJSON
