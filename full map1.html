@@ -34,7 +34,6 @@
 	    SC.get('/users/'+user_id, {"limit":1}, function(response){
 	    	var city = response.city;
     	    	console.log(comments[0].body,city)
-    	    var comments = comments[0].body;
 		     $(document).ready(function () {
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
         	var latitude = response.results[0].geometry.location.lat;
