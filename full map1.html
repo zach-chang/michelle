@@ -31,8 +31,13 @@
 	  	autoPlay: true,
 
 */
-    SC.get('/tracks/127337725', function(track){
-        SC.oEmbed(track.permalink_url, document.getElementById('player'));
+
+
+SC.stream("/tracks/293", function(track) {
+	SC.oEmbed(track.permalink_url, document.getElementById('player'));
+
+
+
 
 
 	  	ontimedcomments: function(comments){
