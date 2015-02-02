@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Soundcloud Comments Map</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      /*#map-canvas {
+      	height: 100%;
+      	position: fixed;
+      	top: 0;
+      	bottom: 0;
+      	left: 0;
+      	right: 0;
+      	z-index: 0;
+      }*/
+
+	  #map-canvas {
+		  height: 100%;
+		  position: absolute; 
+		  top: 0; 
+		  bottom: -200px; 
+		  left: 0; 
+		  right: 0; 
+		  z-index: 0;
+}
+ 
+        .comments {
+		  z-index: 100;
+		  position: relative;
+		  left: 50px;
+      	  font-family: helvetica;
+      	  font-size: 9pt;
+      	  color: white;
+      }
+
+    </style>
+ 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+ 	<!--SOUND CLOUD STARTS HERE-->
+  	<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
+	<script>
+	$(document).ready(function() {
+        SC.initialize({
+  		client_id: 'd58ccfcabb9df6603086be7f94396604'
+  		});//closes SC.initialize
+
+		SC.stream("/tracks/127337725", {
+	  	autoPlay: true,
+	  	ontimedcomments: function(comments){
+
+
+	    var user_id = comments[0].user_id;
+	    var comments = comments[0].body;	
+
+		    	$("body").append("<div class = 'comments'>" + comments + "</div>");
+
+	    SC.get('/users/'+user_id, {"limit":1}, function(response){
+	    	var city = response.city;
+    		    	    console.log(comments[0].body,city)
+
+		     $(document).ready(function () {
+
+        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyBcF_5owxQkfJi3gkZgzngaikp1zWq9hoY", function(response){
+        	var latitude = response.results[0].geometry.location.lat;
+        	var longitude = response.results[0].geometry.location.lng;
+			var location = new google.maps.LatLng(latitude,longitude);
+            //console.log (longitude,latitude)
+	    	//addMarkerToMap(city)
+	    	var marker = new google.maps.Marker({
+	        position: location,
+	        map: map,
+	        title: comments,
+	    	});//closes google maps marker  
+		        })//closes getJSON
+          });//closes readyfunction
+  
+	    })//closes SC.get response city
+	  }//closes ontimedcomments
+	});//closes stream
+	SC.stream("/tracks/127337725", function(sound){
+		sound.play();
+	  });
+	});//closes readyfunction
+	</script>
+
+	<!--SOUND CLOUD ENDS-->
+
+	<!--GOOGLE MAPS BEGIN-->
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+	var map;
+	var ocean = new google.maps.LatLng(59.164796, -46.382024);
+	var MY_MAPTYPE_ID = 'custom_style';
+	function initialize() {
+	  var featureOpts = [
+	    {
+	      stylers: [
+	        { visibility: 'simplified' },
+	        { gamma: 0.25 },
+	        { weight: 0.25 },
+	        { color: '#C8C8DA' },
+	        { lightness: 50 },
+	      ]
+	    },
+	    {
+	      elementType: 'labels',
+	      stylers: [
+	        { visibility: 'off' }
+	      ]
+	    },
+	    {
+	      featureType: 'road.local',
+	      stylers: [
+	        { visibility: 'off' }
+	      ]
+	    },
+	    {
+	      featureType: 'water',
+	      stylers: [
+	        { color: '#69696B' }
+	      ]
+	    }
+	  ];
+	  var mapOptions = {
+	    zoom: 2.5,
+	    center: ocean,
+	    mapTypeControlOptions: {
+	      mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+	    },
+	    mapTypeId: MY_MAPTYPE_ID
+	  };
+	  map = new google.maps.Map(document.getElementById('map-canvas'),
+	      mapOptions);
+	  var styledMapOptions = {
+	    name: 'Custom Style'
+	  };
+	  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+	  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  	</head>
+  	<body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
+
+<!--next steps: better markers, maybe with lines, play pause soundcloud, comments 
